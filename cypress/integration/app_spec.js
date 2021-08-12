@@ -19,6 +19,18 @@ describe("Sign Up", () => {
 
     cy.get('input[type="submit"]').click();
 
+    cy.get('input[type="submit"]').should(($input) => {
+      const val = $input.val();
+      expect(val).to.equal("Saving...");
+    });
+
+    cy.wait(4501);
+
+    cy.get('input[type="submit"]').should(($input) => {
+      const val = $input.val();
+      expect(val).to.equal("Saved!");
+    });
+
     cy.get("li").should(
       "contain",
       "Some Name - some@email.com - core - git-it"
